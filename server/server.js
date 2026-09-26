@@ -28,7 +28,7 @@ app.set("trust proxy", 1); // needed for correct req.ip behind a proxy/host
 app.use(helmet()); // sets secure HTTP headers
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: ["https://coindrop-rewards.vercel.app", "https://coindrop.shop", "http://localhost:5173"],
     credentials: true, // allow the httpOnly auth cookie to be sent
   })
 );
