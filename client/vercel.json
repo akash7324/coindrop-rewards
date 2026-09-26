@@ -1,9 +1,8 @@
 {
-  "version": 2,
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://coindrop-rewards-api-new.onrender.com*"
+      "destination": "https://coindrop-rewards-api-new.onrender.com/api/:path*"
     },
     {
       "source": "/(.*)",
