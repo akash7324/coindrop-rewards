@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CoinDrop Rewards — sitemap.xml
+  Only PUBLIC, crawlable pages are listed here. Logged-in-only app pages
+  (/dashboard, /redeem, /history) and the /admin panel are intentionally
+  excluded — they require authentication, show private per-user data, and
+  should never be indexed (see robots.txt, which explicitly disallows them).
+
+  Update the <lastmod> date whenever a listed page's content changes.
+  If you host on a different domain than coindrop.shop, replace every
+  <loc> below with your real domain first.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://coindrop.shop/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://coindrop.shop/signup</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://coindrop.shop/login</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
