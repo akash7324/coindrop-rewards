@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://coindrop-rewards-api-new.onrender.com/api/:path*"
+      "destination": "https://coindrop-rewards-api-new.onrender.com/:path*"
     },
     {
       "source": "/(.*)",
