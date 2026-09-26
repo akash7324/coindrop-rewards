@@ -1,5 +1,12 @@
 {
   "rewrites": [
-    { "source": "/((?!sitemap.xml|robots.txt|assets/.*).*)", "destination": "/index.html" }
+    {
+      "source": "/api/:path*",
+      "destination": "https://coindrop-rewards-api-new.onrender.com*"
+    },
+    {
+      "source": "/((?!sitemap.xml|robots.txt|assets/.*).*)",
+      "destination": "/index.html"
+    }
   ]
 }
