@@ -35,8 +35,8 @@ export default function Dashboard() {
   }, []);
 
   const handleWatchAdClick = () => {
-  window.open("https://omg10.com/4/11886573", "_blank");
-  startCooldown(15);
+  await loadStats()；
+  await refreshUser()；
 };
   
   
@@ -48,7 +48,6 @@ export default function Dashboard() {
       setCooldownRemaining((prev) => {
         if (prev <= 1) {
           clearInterval(cooldownIntervalRef.current);
-          handleRewardGranted();
           return 0;
         }
         return prev - 1;
