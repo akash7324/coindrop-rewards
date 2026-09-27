@@ -35,12 +35,10 @@ export default function Dashboard() {
   }, []);
 
   const handleWatchAdClick = () => {
-  // 1. Pehle Monetag ka copied Direct Link naye tab me open karein
   window.open("https://omg10.com/4/11886573", "_blank");
-
-  // 2. Phir uske baad timer shuru karein
-  startCooldown(15); 
+  startCooldown(15);
 };
+  
   
 
   const startCooldown = (seconds) => {
@@ -50,6 +48,7 @@ export default function Dashboard() {
       setCooldownRemaining((prev) => {
         if (prev <= 1) {
           clearInterval(cooldownIntervalRef.current);
+          handleRewardGranted();
           return 0;
         }
         return prev - 1;
