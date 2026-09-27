@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import VideoAdModal from "../components/VideoAdModal";
-import { ADSTERRA_SMARTLINK_URL, isSmartlinkConfigured } from "../config/ads";
+import { isSmartlinkConfigured } from "../config/ads";
 
 const DEFAULT_COOLDOWN_SECONDS = 10;
 const DEFAULT_DAILY_LIMIT = 40;
@@ -14,19 +14,21 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [showAdModal, setShowAdModal] = useState(false);
 
-  // Anti-fraud button cooldown: counts down from adCooldownSeconds (10s
-  // by default) the instant an ad session is initiated. The server
-  // enforces the same cooldown independently in /api/ads/start — this
-  // is just the UI reflection of it, so bot-clicking never even reaches
-  // the network before the button visibly locks.
+  // Anti-fraud button cooldown tracking
   const [cooldownRemaining, setCooldownRemaining] = useState(0);
   const cooldownIntervalRef = useRef(null);
 
+  // Load backend stats
   const loadStats = async () => {
     setLoading(true);
-    const { data } = await api.get("/users/dashboard");
-    setStats(data);
-    setLoading(false);
+    try {
+      const { data } = await api.get("/users/dashboard");
+      setStats(data);
+    } catch (error) {
+      console.error("Error loading stats:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -34,13 +36,7 @@ export default function Dashboard() {
     return () => clearInterval(cooldownIntervalRef.current);
   }, []);
 
-  const handleWatchAdClick = () => {
-  await loadStats()；
-  await refreshUser()；
-};
-  
-  
-
+  // Cooldown timer starter
   const startCooldown = (seconds) => {
     clearInterval(cooldownIntervalRef.current);
     setCooldownRemaining(seconds);
@@ -55,15 +51,26 @@ export default function Dashboard() {
     }, 1000);
   };
 
-  // Fires the instant the user taps "Watch". Opening window.open() here,
-  // synchronously inside the click handler (not after an await), is what
-  // stops browser popup-blockers from swallowing the Smartlink tab.
+  // 1. Asli function jo points badhane par website data refresh karega
+  const handleRewardGranted = async () => {
+    try {
+      // Backend ko ad complete hone ka signal bhejein taaki points milein
+      await api.post("/ads/complete"); 
+      await loadStats();
+      await refreshUser();
+    } catch (error) {
+      console.error("Error granting reward:", error);
+    }
+  };
+
+  // 2. Click handle function - Jo Ad load karega aur timer chalu karega
   const handleWatchClick = () => {
     if (dailyLimitReached || cooldownRemaining > 0) return;
 
-    if (isSmartlinkConfigured()) {
-      window.open(ADSTERRA_SMARTLINK_URL, "_blank", "noopener,noreferrer");
-    }
+    // Aapka Monetag Direct Link naye tab me open hoga
+    window.open("https://omg10.com/4/11886573", "_blank", "noopener,noreferrer");
+    
+    // UI Cooldown aur Modal show hoga
     startCooldown(stats?.adCooldownSeconds || DEFAULT_COOLDOWN_SECONDS);
     setShowAdModal(true);
   };
