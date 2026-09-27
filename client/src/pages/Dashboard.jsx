@@ -34,10 +34,14 @@ export default function Dashboard() {
     return () => clearInterval(cooldownIntervalRef.current);
   }, []);
 
-  const handleRewardGranted = async () => {
-    await loadStats();
-    await refreshUser();
-  };
+  const handleWatchAdClick = () => {
+  // 1. Pehle Monetag ka copied Direct Link naye tab me open karein
+  window.open("https://omg10.com/4/11886573", "_blank");
+
+  // 2. Phir uske baad timer shuru karein
+  startCooldown(15); 
+};
+  
 
   const startCooldown = (seconds) => {
     clearInterval(cooldownIntervalRef.current);
