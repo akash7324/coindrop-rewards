@@ -9,8 +9,8 @@
 // (Adsterra Dashboard → Smartlink → your zone → "Direct Link" URL).
 //
 // INSERT ADSTERRA SMARTLINK URL HERE
-export const ADSTERRA_SMARTLINK_URL = "https://your-smartlink-url.com/xxxxxxx";
+export const ADSTERRA_SMARTLINK_URL = "https://omg10.com/4/11886573";
 
 // Simple guard so nothing opens until you've actually pasted a real URL.
 export const isSmartlinkConfigured = () =>
-  Boolean(ADSTERRA_SMARTLINK_URL) && !ADSTERRA_SMARTLINK_URL.includes("your-smartlink-url.com");
+  Boolean(ADSTERRA_SMARTLINK_URL) && !ADSTERRA_SMARTLINK_URL.includes("https://omg10.com/4/11886573");
