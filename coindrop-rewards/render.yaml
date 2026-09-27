@@ -1,0 +1,54 @@
+# Render Blueprint — optional Infrastructure-as-Code definition.
+#
+# This file lets you recreate the exact same backend Web Service by
+# clicking "New +" → "Blueprint" in the Render dashboard and pointing
+# it at this repo, instead of configuring each field by hand. It is
+# NOT required — you can also just create a Web Service manually with
+# Root Directory = server (see README.md §6.2) and it works the same.
+#
+# Secrets (MONGO_URI, JWT_SECRET) are intentionally left for you to
+# fill in via the Render dashboard after the service is created —
+# never commit real secret values into this file.
+
+services:
+  - type: web
+    name: coindrop-rewards-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        value: https://www.coindrop.shop
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: JWT_COOKIE_EXPIRES_DAYS
+        value: "7"
+      - key: POINTS_PER_AD_VIEW
+        value: "40"
+      - key: AD_MIN_WATCH_SECONDS
+        value: "15"
+      - key: REDEEM_POINTS_THRESHOLD
+        value: "25000"
+      - key: REDEEM_CASH_VALUE_INR
+        value: "50"
+      - key: AD_DAILY_LIMIT
+        value: "40"
+      - key: AD_LIMIT_WINDOW_HOURS
+        value: "12"
+      - key: AD_COOLDOWN_SECONDS
+        value: "10"
+      - key: RATE_LIMIT_WINDOW_MIN
+        value: "15"
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: "200"
+      # Set these two manually in the Render dashboard (Environment tab)
+      # after the service is created — do not hardcode real secrets here:
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false

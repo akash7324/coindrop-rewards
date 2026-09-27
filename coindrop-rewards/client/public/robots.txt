@@ -1,0 +1,18 @@
+# CoinDrop Rewards — robots.txt
+# If you host on a different domain than coindrop.shop, update the
+# Sitemap line below to match your real domain.
+
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /signup
+
+# Logged-in-only app pages — private per-user data, never index these
+Disallow: /dashboard
+Disallow: /redeem
+Disallow: /history
+
+# Admin panel — must never appear in search results
+Disallow: /admin
+
+Sitemap: https://coindrop.shop/sitemap.xml
